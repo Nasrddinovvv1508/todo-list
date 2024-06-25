@@ -1,0 +1,102 @@
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.wrapper {
+  text-align: left;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+  span {
+    font-size: 25px;
+    margin-bottom: 5px;
+  }
+
+  input {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 25px;
+    border-radius: 5px;
+  }
+}
+
+button {
+  align-self: flex-end;
+}
+
+ul {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+li {
+  padding-left: 10px;
+  list-style: none;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin: 0 0;
+} */
+
+/* .wrapper {
+  max-width: 800px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+} */
