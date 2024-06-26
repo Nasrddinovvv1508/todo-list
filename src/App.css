@@ -100,3 +100,8 @@ li {
   margin-left: auto;
   margin-right: auto;
 } */
+
+.complated {
+  opacity: 0.5;
+  text-decoration: line-through;
+}

@@ -7,7 +7,7 @@ import { useRef } from "react"
 // redux
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "./app/todoSice";
+import { addTodo, removeTodo, changeStatusTodo } from "./app/todoSice";
 
 // icons
 import { FaTrashCan } from "react-icons/fa6";
@@ -18,7 +18,7 @@ function App() {
   let dispatch = useDispatch();
   let inputValue = useRef();
 
-  let { todos } = useSelector((state) => state.todos)
+  let { todos, complatedCount, unComplotedCount } = useSelector((state) => state.todos)
   console.log(todos);
 
   let handleSubmit = (e) => {
@@ -28,6 +28,7 @@ function App() {
       dispatch(addTodo({
         id: Math.random(),
         text: value,
+        complated: false,
       }));
       toast.success(`Added successfully`);
       inputValue.current.value = ``;
@@ -57,18 +58,21 @@ function App() {
             <li className="border-b-2 py-2 border-[#a3cad6] flex items-center justify-between" key={todo.id}>
               <div className="form-control mr-1">
                 <label className="cursor-pointer label">
-                  <input type="checkbox" defaultChecked className="checkbox checkbox-warning" />
+                  <input type="checkbox" onClick={() => dispatch(changeStatusTodo(todo.id))} readOnly checked={todo.complated} className="checkbox checkbox-warning" />
                 </label>
               </div>
-              <h2 className="w-[300px] text-left text-lg text-gray-500"> {todo.text} </h2>
-              <div className="flex gap-2 justify-end">
-                <button className="btn btn-error text-white"> <FaTrashCan /> </button>
-                <button className="btn btn-primary"> <MdEdit className="" /> </button>
+              <div className={`flex items-center ${todo.complated ? `complated` : ``}`}>
+                <h2 className="w-[300px] text-left text-lg text-gray-500"> {todo.text} </h2>
+                <div className="w-[100px] flex gap-2 justify-end">
+                  <button onClick={() => dispatch(removeTodo(todo.id))} className="btn btn-error text-white"> <FaTrashCan /> </button>
+                  {!todo.complated && <button className="btn btn-primary"> <MdEdit /> </button>}
+                </div>
               </div>
+
             </li>
           )
         })}
-        {todos.length > 0 && <div className="w-full flex justify-end mr-5"><button className="text-[#d98326] text-right mt-10 mb-3 flex items-center gap-1"> <TiDelete /> Clear Complated</button></div>}
+        {todos.length > 0 && <div className="w-full flex justify-end mr-5"><button className="text-[#d98326] text-right mt-10 mb-3 flex items-center gap-1"> <TiDelete /> Clear Complated ({complatedCount}) </button></div>}
       </ul>
     </div>
   )
