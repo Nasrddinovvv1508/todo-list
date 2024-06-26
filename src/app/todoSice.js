@@ -6,8 +6,11 @@ let initialStateFromLocalStorage = () => {
         todos: [],
         complatedCount: 0,
         unComplotedCount: 0,
+        // deleteCompleted: [],
     }
 }
+
+let deleteCompleted = [];
 
 let todosSlice = createSlice({
     name: "todos",
@@ -26,11 +29,19 @@ let todosSlice = createSlice({
         changeStatusTodo: (state, { payload }) => {
             let item = state.todos.find((todo) => todo.id == payload)
             item.complated = !item.complated
+            deleteCompleted = [...deleteCompleted, !deleteCompleted.includes(payload) ? payload : ``];
+            console.log(deleteCompleted);
+            state.deleteCompletedTodos = deleteCompleted;
+            console.log(state.deleteCompletedTodos);
+
             todosSlice.caseReducers.calculateTotal(state)
         },
-        calculateTotal: (state) => {
-            localStorage.setItem('todos', JSON.stringify(state))
+        removeComplated: (state, { payload }) => {
+            state.todos = payload.filter((todo) => !todo.complated);
 
+            todosSlice.caseReducers.calculateTotal(state);
+        },
+        calculateTotal: (state) => {
             let done = 0;
             let notDone = 0;
 
@@ -44,10 +55,12 @@ let todosSlice = createSlice({
 
             state.complatedCount = done;
             state.unComplotedCount = notDone;
-        }
+
+            localStorage.setItem('todos', JSON.stringify(state))
+        },
     },
 })
 
 // actions
-export let { addTodo, removeTodo, changeStatusTodo } = todosSlice.actions;
+export let { addTodo, removeTodo, changeStatusTodo, removeComplated } = todosSlice.actions;
 export default todosSlice.reducer

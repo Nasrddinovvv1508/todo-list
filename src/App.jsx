@@ -7,7 +7,7 @@ import { useRef } from "react"
 // redux
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo, removeTodo, changeStatusTodo } from "./app/todoSice";
+import { addTodo, removeTodo, changeStatusTodo, removeComplated } from "./app/todoSice";
 
 // icons
 import { FaTrashCan } from "react-icons/fa6";
@@ -72,7 +72,7 @@ function App() {
             </li>
           )
         })}
-        {todos.length > 0 && <div className="w-full flex justify-end mr-5"><button className="text-[#d98326] text-right mt-10 mb-3 flex items-center gap-1"> <TiDelete /> Clear Complated ({complatedCount}) </button></div>}
+        {todos.length > 0 && <div className="w-full flex justify-end mr-5"><button onClick={() => dispatch(removeComplated(todos))} className="text-[#d98326] text-right mt-10 mb-3 flex items-center gap-1"> <TiDelete /> Clear Complated ({complatedCount}) </button></div>}
       </ul>
     </div>
   )
