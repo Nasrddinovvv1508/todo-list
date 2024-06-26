@@ -6,11 +6,8 @@ let initialStateFromLocalStorage = () => {
         todos: [],
         complatedCount: 0,
         unComplotedCount: 0,
-        // deleteCompleted: [],
     }
 }
-
-let deleteCompleted = [];
 
 let todosSlice = createSlice({
     name: "todos",
@@ -29,10 +26,6 @@ let todosSlice = createSlice({
         changeStatusTodo: (state, { payload }) => {
             let item = state.todos.find((todo) => todo.id == payload)
             item.complated = !item.complated
-            deleteCompleted = [...deleteCompleted, !deleteCompleted.includes(payload) ? payload : ``];
-            console.log(deleteCompleted);
-            state.deleteCompletedTodos = deleteCompleted;
-            console.log(state.deleteCompletedTodos);
 
             todosSlice.caseReducers.calculateTotal(state)
         },
